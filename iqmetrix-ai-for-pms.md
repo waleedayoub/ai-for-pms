@@ -147,6 +147,21 @@ We're going to move fast. The first half is about *you* — making your work eas
 | Ask AI → Copy answer → Paste into tool | Ask AI → AI updates the tool directly             |
 | Upload a doc → Get analysis            | AI reads from SharePoint/Confluence automatically |
 | Manual research → Summarize yourself   | Deep Research runs for 30 min → Delivers report   |
+| Repeat instructions every session      | Skills encode your expertise once, applied always |
+
+**What Are Skills?**
+
+A **Skill** is a way to teach AI how to do something specific and reusable. Think of it as packaging your expertise into a format the AI can apply automatically.
+
+**Generic Concept:** Any repeatable workflow, checklist, or standard you follow can become a skill — your code review standards, your PRD template, your interview synthesis method.
+
+**Anthropic's Implementation:** In Claude Code/Desktop, Skills are markdown files (SKILL.md) that Claude automatically applies when relevant. You describe *when* to use the skill and *how* to execute it — Claude handles the rest.
+
+**Examples:**
+- "Review PRs using our team's security checklist"
+- "Generate commit messages in our preferred format"
+- "Synthesize customer interviews using our research framework"
+- "Create Azure DevOps work items following our template"
 
 **SPEAKER NOTES:**
 You don't need to know all of these. The key insight: AI is moving from "assistant you talk to" toward "agent that takes actions in your tools." We'll show you what that means with your actual stack — Aha!, Azure DevOps, Confluence, Databricks.
@@ -331,6 +346,7 @@ This is a game-changer for ideation. You can literally think out loud and get st
 | ⭐11 | Update roadmap + create follow-up work   | Switch between Aha!, ADO, copy-paste                  | AI reads from Aha!, updates status, creates ADO work items      | Claude Desktop + Aha!/ADO  | 1-2 hours → 10 min      |
 | ⭐12 | **Build a plan to launch a new product** | Scattered docs, meetings, manual coordination         | AI synthesizes context, drafts launch plan, identifies gaps     | Claude.ai Projects         | Days → hours            |
 | 13  | Create custom learning path              | Search for resources, organize manually               | AI curates resources, sequences them, creates checkpoints       | Claude.ai                  | Weeks → days            |
+| 14  | **Create reusable Skills**               | Re-explain standards every session                    | Encode expertise once, Claude applies it automatically forever  | Claude Code/Desktop        | 5-10 min/task saved     |
 
 **⭐ = Live demo in session**
 
@@ -1093,6 +1109,119 @@ Start simple. Track failures. Look for patterns. Improve iteratively.
 
 ---
 
+## Workflow 14: Creating Reusable Skills
+
+**User Story:** *"As a PM, I want to encode my expertise into reusable Skills so Claude applies my standards automatically every time, without me having to re-explain."*
+
+**What Are Skills?**
+
+A **Skill** is a markdown file that teaches Claude how to do something specific. Once created, Claude automatically detects when the skill is relevant and applies it — no manual invocation needed.
+
+**Generic Concept:** Any expertise you repeat can become a skill:
+- Your interview synthesis method
+- Your PRD review checklist
+- Your stakeholder communication format
+- Your competitive analysis framework
+
+**Anthropic's Implementation:** Skills are SKILL.md files stored in `.claude/skills/` (project-level, shared with team) or `~/.claude/skills/` (personal, available everywhere).
+
+**Workflow Sketch:**
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│ IDENTIFY REPEATABLE EXPERTISE                               │
+├─────────────────────────────────────────────────────────────┤
+│ Ask yourself:                                               │
+│ • What do I explain to Claude repeatedly?                   │
+│ • What standards do I apply manually every time?            │
+│ • What would I want a junior PM to always remember?         │
+│                                                             │
+│ Examples:                                                   │
+│ • "When synthesizing interviews, always look for..."        │
+│ • "PRDs must include these sections..."                     │
+│ • "Azure DevOps stories should be formatted like..."        │
+└─────────────────────────────────────────────────────────────┘
+            │
+            ▼
+┌─────────────────────────────────────────────────────────────┐
+│ WRITE THE SKILL FILE                                        │
+├─────────────────────────────────────────────────────────────┤
+│ Create: .claude/skills/interview-synthesis/SKILL.md         │
+│                                                             │
+│ ---                                                         │
+│ name: interview-synthesis                                   │
+│ description: Synthesizes customer interviews using our      │
+│   research framework, identifying themes, contradictions,   │
+│   and actionable quotes for product decisions               │
+│ ---                                                         │
+│                                                             │
+│ # Interview Synthesis Skill                                 │
+│                                                             │
+│ When synthesizing customer interviews, always:              │
+│                                                             │
+│ 1. **Identify themes** by frequency (3+ mentions = theme)   │
+│ 2. **Flag contradictions** between participants             │
+│ 3. **Extract quotes** that best illustrate each theme       │
+│ 4. **Note participant context** (role, company size, etc.)  │
+│ 5. **Recommend next steps** based on patterns               │
+│                                                             │
+│ ## Output Format                                            │
+│ - Executive summary (3 sentences max)                       │
+│ - Theme table with evidence count                           │
+│ - Top 5 quotes with attribution                             │
+│ - Contradictions section                                    │
+│ - Recommended actions                                       │
+└─────────────────────────────────────────────────────────────┘
+            │
+            ▼
+┌─────────────────────────────────────────────────────────────┐
+│ SKILL AUTO-APPLIES                                          │
+├─────────────────────────────────────────────────────────────┤
+│ Next time you ask Claude to synthesize interviews:          │
+│                                                             │
+│ "Synthesize these 6 customer interviews"                    │
+│                                                             │
+│ Claude detects the skill matches based on description,      │
+│ loads it automatically, and applies your framework.         │
+│                                                             │
+│ No need to re-explain. Consistent output every time.        │
+└─────────────────────────────────────────────────────────────┘
+```
+
+**Example Skills for PMs:**
+
+| Skill Name | Description | What It Encodes |
+|------------|-------------|-----------------|
+| interview-synthesis | Synthesize customer interviews | Your research framework, quote selection criteria |
+| prd-reviewer | Review PRDs for completeness | Your checklist, common gaps to flag |
+| ado-story-creator | Create Azure DevOps stories | Your template, field mappings, acceptance criteria format |
+| competitive-analysis | Analyze competitor products | Your framework, comparison dimensions |
+| meeting-summarizer | Summarize meeting notes | Your format, action item extraction rules |
+| launch-planner | Plan product launches | Your phased approach, checklist, risk categories |
+
+**Tools:** Claude Code, Claude Desktop, or Claude.ai (Pro/Team/Enterprise plans)
+
+**Time Savings:** 5-10 minutes per task (no re-explaining) + consistent quality
+
+**Key Insight:** Skills are how you scale your expertise. Instead of being the bottleneck who "knows how we do things," you encode that knowledge once and Claude applies it for anyone on the team.
+
+**The Skill Creation Pattern:**
+
+```
+1. Notice you're repeating yourself  →  "I keep explaining our PRD format"
+2. Write it as instructions         →  Create SKILL.md with your standards
+3. Let Claude auto-apply            →  Consistent output without reminders
+4. Iterate based on gaps            →  Add to the skill when you spot issues
+```
+
+**Pro Tips:**
+- **Start with descriptions** — Claude uses the description to decide when to apply your skill. Be specific: "Synthesizes customer interviews for product decisions" beats "Helps with interviews"
+- **Include examples** — Show Claude what good output looks like
+- **Commit to version control** — `.claude/skills/` in your repo means the whole team benefits
+- **Compose multiple skills** — You can have an interview-synthesis skill AND a stakeholder-summary skill; Claude applies both when relevant
+
+---
+
 # PART 3: RECOMMENDED DEMOS & PLAYBOOKS
 
 ## Demo Selection Rationale
@@ -1155,7 +1284,7 @@ Start simple. Track failures. Look for patterns. Improve iteratively.
 ## Glimpse: Claude Code / Cowork (2 minutes, after Demo 4)
 
 ### Purpose
-Show the "ceiling" — full automation — without spending time on it.
+Show the "ceiling" — full automation with reusable Skills — without spending time on it.
 
 ### Script
 
@@ -1167,6 +1296,7 @@ Show the "ceiling" — full automation — without spending time on it.
 > - Read and write files on your computer
 > - Run commands
 > - Execute multi-step workflows automatically
+> - **Apply Skills you've created** — reusable expertise that runs automatically
 >
 > Remember the TMForum certification project? This is how you'd build something like that — custom automation that runs across your entire workflow.
 >
@@ -1176,10 +1306,21 @@ Show the "ceiling" — full automation — without spending time on it.
 
 > "Anthropic just launched Cowork last week — it's basically Claude Code with a visual interface. Same power, no terminal required. Available on Mac for Claude Max subscribers."
 
+**The Power of Skills:**
+
+> "One more thing — Skills. Remember I mentioned these earlier? Here's where they really shine.
+>
+> A Skill is a markdown file that teaches Claude how to do something specific. Once you create a Skill, Claude automatically applies it whenever relevant.
+>
+> For example, if I create a 'PM Interview Synthesis' skill with my preferred format, themes to look for, and quote selection criteria — Claude applies that every time I ask it to synthesize interviews. No re-explaining. No forgetting details. Consistent output every time.
+>
+> This is how you scale your expertise. Write it once, use it forever."
+
 **Key Points:**
 - This is the "full automation" end of the progression
 - Not for everyone, but shows what's possible
 - Cowork makes it accessible to non-technical users
+- **Skills** let you encode and reuse your expertise
 - Offer follow-up for interested folks
 
 ---
@@ -1521,6 +1662,38 @@ This is where PM judgment matters. Too many options overwhelm users. Too few fru
 
 ---
 
+## Slide: Skills — Encoding Expertise for Your Users
+
+**SLIDE TITLE:** Skills: Reusable Expertise at Scale
+
+**CONTENT:**
+
+**The Challenge:**
+- Users have to re-explain their context every session
+- Institutional knowledge lives in people's heads
+- Inconsistent outputs when different people prompt differently
+
+**The Solution: Skills**
+
+A Skill encodes expertise so AI applies it automatically:
+
+| Without Skills | With Skills |
+|----------------|-------------|
+| User explains their format each time | Format encoded once, applied always |
+| Quality varies by who's prompting | Consistent output for everyone |
+| New team members start from scratch | Expertise transfers instantly |
+| You're the bottleneck for "how we do it" | AI applies your standards for you |
+
+**iQmetrix Examples:**
+- **Support Skill:** "When answering RQ questions, always check the knowledge base first, cite specific articles, and escalate if confidence is low"
+- **API Review Skill:** "When reviewing API designs, check for TMForum alignment, security requirements, and versioning standards"
+- **Customer Comms Skill:** "When drafting customer communications, use our brand voice, avoid jargon, and include relevant support links"
+
+**For Product Teams:**
+Skills aren't just for personal use — they're a product pattern. Consider: what expertise could your *product* encode as Skills for your *users*?
+
+---
+
 ## Slide: Context vs. Concealment
 
 **SLIDE TITLE:** What Does AI See? What Stays Hidden?
@@ -1537,6 +1710,7 @@ This is where PM judgment matters. Too many options overwhelm users. Too few fru
 - Task-specific prompts (how to format output)
 - Safety rails and filters
 - Tool definitions and capabilities
+- **Skills** (reusable expertise packages)
 
 **Example Architecture:**
 ```
@@ -1618,6 +1792,7 @@ This is the lens to use when evaluating AI features. You now have intuition from
 - Claude Desktop + Aha!/Azure DevOps — Multi-system workflows
 - Claude Code — Full automation, custom workflows (terminal-based)
 - Claude Cowork — Same power as Claude Code, GUI for non-coders (new!)
+- **Skills** — Encode your expertise into reusable markdown files that Claude auto-applies
 
 **The Progression:**
 ```
