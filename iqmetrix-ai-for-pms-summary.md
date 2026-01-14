@@ -46,6 +46,7 @@ Help PMs build AI intuition through hands-on examples, then apply that intuition
 | ⭐11 | Update roadmap + create follow-up work | Switch between Aha!, ADO, copy-paste | AI reads from Aha!, updates status, creates ADO work items | Claude Desktop + Aha!/ADO | 1-2 hours → 10 min |
 | ⭐12 | **Build a plan to launch a new product** | Scattered docs, meetings, manual coordination | AI synthesizes context, drafts launch plan, identifies gaps | Claude.ai Projects | Days → hours |
 | 13 | Create custom learning path | Search for resources, organize manually | AI curates resources, sequences them, creates checkpoints | Claude.ai | Weeks → days |
+| 14 | **Create reusable Skills** | Re-explain standards every session | Encode expertise once, Claude applies it automatically | Claude Code/Desktop | 5-10 min/task saved |
 
 **⭐ = Live demo in session**
 
@@ -59,6 +60,41 @@ Help PMs build AI intuition through hands-on examples, then apply that intuition
 | Claude.ai + Connectors | Thinking partner + reads from M365, Databricks | Claude Pro/Team |
 | Claude Desktop + MCPs | Multi-system workflows (Aha!, Azure DevOps) | Free app + setup |
 | Claude Code / Cowork | Full automation (glimpse only) | Pro/Max tiers |
+| **Skills** | Reusable expertise that Claude auto-applies | Claude Code/Desktop |
+
+---
+
+## What Are Skills?
+
+A **Skill** is a way to teach AI how to do something specific and reusable. Think of it as packaging your expertise into a format the AI can apply automatically.
+
+**Generic Concept:** Any repeatable workflow, checklist, or standard you follow can become a skill — your interview synthesis method, your PRD template, your stakeholder communication format.
+
+**Anthropic's Implementation:** In Claude Code and Claude Desktop, Skills are markdown files (SKILL.md) that Claude automatically applies when relevant. You describe *when* to use the skill and *how* to execute it — Claude handles the rest.
+
+**Why Skills Matter for PMs:**
+
+| Without Skills | With Skills |
+|----------------|-------------|
+| Re-explain your format each session | Format encoded once, applied always |
+| Quality varies by who's prompting | Consistent output for everyone |
+| New team members start from scratch | Expertise transfers instantly |
+
+**Example Skills:**
+- **Interview Synthesis:** Your research framework, quote selection criteria, output format
+- **PRD Reviewer:** Your checklist, common gaps to flag, acceptance criteria standards
+- **ADO Story Creator:** Your template, field mappings, how to write acceptance criteria
+- **Meeting Summarizer:** Your format, action item extraction rules, stakeholder summary style
+
+**The Skill Creation Pattern:**
+```
+1. Notice you're repeating yourself  →  "I keep explaining our PRD format"
+2. Write it as instructions         →  Create SKILL.md with your standards
+3. Let Claude auto-apply            →  Consistent output without reminders
+4. Iterate based on gaps            →  Add to the skill when you spot issues
+```
+
+**Key Insight:** Skills are how you scale your expertise. Instead of being the bottleneck who "knows how we do things," you encode that knowledge once and Claude applies it for anyone on the team.
 
 ---
 
@@ -146,6 +182,7 @@ We'll cover how to apply this intuition to iQmetrix products:
 ## What Attendees Leave With
 
 - Mental model: thinking partner + task automator
+- Understanding of **Skills** — how to encode and reuse your expertise
 - Hands-on experience seeing AI applied to their workflows
 - Framework for evaluating AI features in iQmetrix products
 - This playbook for self-study and experimentation
