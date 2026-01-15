@@ -1,3 +1,8 @@
-.DS_Store
-context/
-data-strategy/
+# Ignore everything
+*
+
+# Except the presentation
+!ai-for-pms-presentation.html
+
+# And keep .gitignore itself
+!.gitignore
